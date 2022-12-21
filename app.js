@@ -1,44 +1,46 @@
-"use strict";
-// let a = "hello world";
-// a = 'pak';
-// // a = 5;
-// console.log(a);
-// let stname:string = "shoaib";
-// let stage:number = 25;
-// let available:boolean = true;
-// console.log(stname,stage,available);
-// stname = 'sattar';
-// stage = 55;
-// available = false;
-// console.log(stname,stage,available);
-// let a = 'saleem';
-// let b = 25;
-// let c = true;
-// console.log(a,b,c);
-// a = 'dawood';
-// b = 26;
-// c = false;
-// // b =  'saleem'
-// console.log(a,b,c);
-// const a = 'salllam';
-// const b:number = 5;
-// const c= true;
-// console.log(a,b,c);
-// let age:number = 15;
-// age = 50;
-// if(age<19){
-//     console.log('you are teen age');
-// }else{
-//         console.log('yo are man');
-//     }
-if (true) {
-    let z = 4;
-    console.log(z);
-    z = 66;
-    console.log(z);
+import inquirer from "inquirer";
+let Todo = [];
+console.clear();
+async function App() {
+    const Todos = await inquirer.prompt([
+        {
+            name: "App",
+            type: "list",
+            message: "Please select your operation",
+            choices: [
+                "AddTodo", "AllTodo", "exit"
+            ]
+        }
+    ]);
+    if (Todos.App === "AddTodo") {
+        addTodo();
+    }
+    else if (Todos.App === "AllTodo") {
+        console.clear();
+        allTodo();
+    }
 }
-else {
-    let z = "string";
-    console.log(z);
+async function addTodo() {
+    const Todos = await inquirer.prompt([
+        {
+            name: "todoInput",
+            type: "input",
+            Message: "please add todo"
+        },
+    ]);
+    Todo.push(Todos.todoInput);
+    App();
 }
-// console.log("let: ");
+async function allTodo() {
+    if (Todo.length > 0) {
+        console.log("your all TODOS");
+        Todo.map((todo) => {
+            console.log(todo);
+        });
+    }
+    else {
+        console.log("no TODOS found");
+    }
+    App();
+}
+App();
